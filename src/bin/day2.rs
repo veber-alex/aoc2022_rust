@@ -1,3 +1,5 @@
+#![allow(clippy::identity_op)]
+
 enum Shape {
     Rock,
     Paper,
@@ -38,6 +40,7 @@ use Shape::*;
 fn main() {
     let input = include_str!("../input/day2.txt");
 
+    // part 1
     let mut score = 0;
     for line in input.as_bytes().chunks(4) {
         let (other, me) = (line[0], line[2]);
@@ -56,9 +59,9 @@ fn main() {
         };
     }
 
-    // part 1
     assert_eq!(score, 14827);
 
+    // part 2
     let mut score = 0;
     for line in input.as_bytes().chunks(4) {
         let (other, outcome) = (line[0], line[2]);
@@ -77,6 +80,5 @@ fn main() {
         };
     }
 
-    // part 2
     assert_eq!(score, 13889);
 }
