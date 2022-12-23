@@ -1,19 +1,18 @@
 #[derive(Debug)]
 enum Inst {
-    NOP,
+    Nop,
     AddX(i32),
 }
 
 impl Inst {
     fn from_str_risc(s: &str) -> [Option<Inst>; 2] {
-        let second = match s {
-            "noop" => None,
-            _ => {
-                let (_, n) = s.split_once(' ').unwrap();
-                Some(Inst::AddX(n.parse().unwrap()))
-            }
+        let second = if s == "noop" {
+            None
+        } else {
+            let (_, n) = s.split_once(' ').unwrap();
+            Some(Inst::AddX(n.parse().unwrap()))
         };
-        [Some(Inst::NOP), second]
+        [Some(Inst::Nop), second]
     }
 }
 
@@ -22,7 +21,7 @@ fn main() {
 
     let instructions: Vec<Inst> = input
         .lines()
-        .flat_map(|line| Inst::from_str_risc(line))
+        .flat_map(Inst::from_str_risc)
         .flatten()
         .collect();
 

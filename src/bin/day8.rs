@@ -12,8 +12,8 @@ fn main() {
     let mut data: Vec<Tree> = input
         .as_bytes()
         .iter()
-        .flat_map(|&b| {
-            (b != b'\n').then(|| Tree {
+        .filter_map(|&b| {
+            (b != b'\n').then_some(Tree {
                 height: b as i8 - 48,
                 vis: false,
                 score: 1,
